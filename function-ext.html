@@ -4,6 +4,48 @@
 <meta charset="utf-8">
 
 <script>
+"use strict"; 
+
+function log(x, y) {
+    y = y || 'World';
+    console.log(x, y);;
+}
+
+log('Hello');
+log('Hello', 'China');
+log('Hello', '');
+
+// if(typeof y === 'undefined') {
+//     y = 'World';
+//     console.log(y);
+// }
+
+function Point(a, b) {
+    this.a = a;
+    this.b = b;
+}
+
+var p = new Point(0, 0);
+console.log(p);
+
+
+// chromium浏览器报错
+// firefox正确
+var x = 1;
+function f(x, y = x) {
+    console.log(y);
+}
+f(2);
+
+function throwIfMissing() {
+    throw new Error('Missing parameter');
+}
+
+function foo(mustBeProvided = throwIfMissing()) {
+    return mustBeProvided;
+}
+
+foo();
 
 </script>
 </head>

@@ -69,6 +69,40 @@ console.log([NaN].indexOf(NaN));
 
 console.log([NaN].findIndex(y => Object.is(NaN, y)));
 
+console.log(['a', 'b', 'c'].fill(7));
+
+let arr15 = new Array(3).fill(6);
+console.log(arr15);
+
+
+for(let index of ['a', 'b'].keys()) {
+    console.log(index);
+}
+
+// 报错
+// for(let elem of ['a', 'b'].values()) {
+//     console.log(elem);
+// }
+
+for(let entry of ['a', 'b'].entries()) {
+    console.log(entry);
+}
+
+let letter = ['a', 'b', 'c'];
+let entries = letter.entries();
+console.log(entries.next().value); // [0, 'a']
+console.log(entries.next().value); // [1, 'b']
+console.log(entries.next().value); // [2, 'c']
+
+
+console.log([1, 2, 3].includes(2));
+
+console.log(Array(3), Array(3).length);
+
+[,'a'].forEach((x, i) => console.log(x, i));
+
+console.log(['a',,'b'].filter(x => true));
+
 
 </script>
 </head>
