@@ -125,6 +125,62 @@ console.log(target);
 
 var obj2 = { a: 1 };
 console.log(Object.assign(obj2) === obj2);
+
+console.log(typeof Object.assign(2));
+
+try{
+    Object.assign(null);
+}catch(Error) {
+
+}
+
+var v1 = 'abc';
+var v2 = true;
+var v3 = 10;
+var obj3 = Object.assign({}, v1, v2, v3);
+console.log(obj3);
+
+var obj4 = Object.assign({b: 'c'},
+    Object.defineProperty({}, 'invisible', {
+        enumerable: false,
+        value: 'hello'
+    })
+);
+console.log(obj4);
+
+var obj5 = {a: {b: 1}};
+var obj6 = Object.assign({}, obj5);
+console.log(obj5);
+console.log(obj5.a.b);
+obj6.a.b = 3;
+console.log(obj6.a.b);
+
+obj5.a.b = 55;
+console.log(obj5.a.b);
+console.log(obj6.a.b);
+
+var target4 = { a: { b: 'c', d: 'e' } };
+var source4 = { a: { b: 'hello' } };
+console.log(Object.assign(target4, source4));
+
+var obj7 = { foo: 'bar', baz: 42 };
+console.log(Object.keys(obj7));
+
+let {keys, values, entries} = Object;
+let obj8 = { a: 1, b: 2, c: 3 };
+for (let key of Object.keys(obj8)) {
+    console.log(key);
+};
+console.log(keys(obj8));
+// for (let value of values(obj8)) {
+//     console.log(value);
+// }
+
+// for (let [key, value] of entries(obj8)) {
+//     console.log([key, value]);
+// }
+// console.log();
+
 </script>
 </head>
 <body>
