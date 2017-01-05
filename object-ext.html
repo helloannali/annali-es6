@@ -4,7 +4,127 @@
 <meta charset="utf-8">
 
 <script>
+var foo = 'bar';
+var baz = { foo };
+console.log(baz);
 
+function f(x, y) {
+    return {x, y};
+}
+
+console.log(f(1, 2));
+
+var o = {
+    method() {
+        return 'Hello!';
+    }
+};
+console.log(o.method());
+
+var birth = '2000/01/01';
+var Person = {
+    name: 'annalee',
+    birth,
+    hello() {
+        console.log('my name is ', this.name);
+    }
+}
+Person.hello();
+console.log(Person.birth);
+
+
+function getPoint() {
+    var x = 1;
+    var y = 10;
+    return { x, y};
+}
+console.log(getPoint());
+
+var ms = {};
+
+function getItem(key) {
+    return key in ms ? ms[key] : null;
+}
+
+function setItem(key, value) {
+    ms[key] = value;
+}
+
+function clear() {
+    ms = {};
+}
+
+exports = { getItem, setItem, clear};
+
+setItem('name', 'annalee');
+console.log(ms);
+
+// 奇怪，为什么需要常见object
+var cart = {
+    _wheels: 4,
+
+    get wheels() {
+        return this._wheels;
+    },
+
+    set wheels(value) {
+        if(value < this._wheels) {
+            try{
+
+            }catch(e){
+                throw new Error('数值太小了！');
+            }
+        }
+        this._wheels = value;
+    }
+}
+
+var myCart = Object.create(cart);
+console.log(myCart.wheels);
+myCart.wheels = 2;
+console.log(myCart.wheels);
+
+console.log(cart);
+cart.wheels = 9;
+console.log(cart.wheels);
+
+
+var obj = {
+    class() {
+
+    }
+};
+// 等同于
+var obj = {
+    'class': function() {
+
+    }
+};
+
+var person = {
+    sayName() {
+        console.log('my name is', this.name);
+    },
+    get firstName() {
+        return 'anna';
+    }
+};
+console.log(person.sayName.name);
+console.log(person.firstName.name);
+
+console.log(Object.is('foo', 'foo'));
+
+// object assign
+var target = { a: 1 };
+var source1 = { b: 2 };
+var source2 = { c: 3 };
+var source3 = { a: 1 };
+
+Object.assign(target, source1, source2, source3);
+console.log(target);
+
+var obj2 = { a: 1 };
+console.log(Object.assign(obj2) === obj2);
 </script>
 </head>
 <body>
