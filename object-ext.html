@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 
 <script>
+"use strict"; 
+
 var foo = 'bar';
 var baz = { foo };
 console.log(baz);
@@ -54,7 +56,7 @@ function clear() {
     ms = {};
 }
 
-exports = { getItem, setItem, clear};
+// exports = { getItem, setItem, clear};
 
 setItem('name', 'annalee');
 console.log(ms);
@@ -166,12 +168,12 @@ console.log(Object.assign(target4, source4));
 var obj7 = { foo: 'bar', baz: 42 };
 console.log(Object.keys(obj7));
 
-let {keys, values, entries} = Object;
-let obj8 = { a: 1, b: 2, c: 3 };
-for (let key of Object.keys(obj8)) {
-    console.log(key);
-};
-console.log(keys(obj8));
+// let {keys, values, entries} = Object;
+// let obj8 = { a: 1, b: 2, c: 3 };
+// for (let key of Object.keys(obj8)) {
+//     console.log(key);
+// };
+// console.log(keys(obj8));
 // for (let value of values(obj8)) {
 //     console.log(value);
 // }
@@ -181,6 +183,58 @@ console.log(keys(obj8));
 // }
 // console.log();
 
+let obj9 = { foo: 123 };
+console.log(Object.getOwnPropertyDescriptor(obj9, 'foo'));
+
+console.log(Object.getOwnPropertyDescriptor(Object.prototype, 'toString').enumerable);
+console.log(Object.getOwnPropertyDescriptor([], 'length').enumerable);
+
+// 属性的遍历
+
+
+
+//
+Object.defineProperty(Object.prototype, '__proto__', {
+    get() {
+        console.log('get');
+        let _thisObj = Object(this);
+        return Object.getPrototypeOf(_thisObj);
+    },
+    set(proto) {
+        console.log('set');
+        if(this === undefined || this === null) {
+            throw new TypeError();
+        }
+        if(!isObject(this)) {
+            return undefined;
+        }
+        if(!isObject(proto)) {
+            return undefined;
+        }
+        let status = Reflect.setPrototypeOf(this, proto);
+        if(!status) {
+            throw new TypeError();
+        }
+    },
+});
+console.log('getPrototypeOf', Object.getPrototypeOf(obj9));
+
+function isObject(value) {
+    return Object(value) === value;
+}
+
+console.log(isObject(1));
+console.log(isObject(obj9));
+
+let proto2 = {};
+let obj10 = { x: 10 };
+Object.setPrototypeOf(obj10, proto2);
+
+proto2.y = 20;
+proto2.z = 40;
+console.log(obj10.x) // 10
+console.log(obj10.y) // 20
+console.log(obj10.z) // 40
 </script>
 </head>
 <body>
